@@ -28,7 +28,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    // origin: "http://localhost:5173",
+    origin: 'https://delicate-mooncake-1b2487.netlify.app', // Allow only your frontend
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
