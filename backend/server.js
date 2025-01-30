@@ -28,7 +28,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: 'https://taupe-seahorse-06ac1c.netlify.app', // Allow only your frontend
+    origin: 'https://farm2doorforu.netlify.app', // Allow only your frontend
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
