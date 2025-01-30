@@ -46,7 +46,7 @@ const Testimonials = () => {
       ></div>
 
       {/* Side Images */}
-      {/* <img
+      <img
         src="https://w7.pngwing.com/pngs/259/289/png-transparent-farmers-market-sticker-fruit-food-farmer-farmers-market-sticker-fruit-thumbnail.png"
         alt="Farmer Image Left"
         className="absolute top-15 left-[300px] w-40 h-70 rounded-lg shadow-lg transform rotate-[15deg]"
@@ -65,7 +65,7 @@ const Testimonials = () => {
         src="https://demo2.themelexus.com/agrile/wp-content/uploads/2024/11/testimonial-img2.jpg"
         alt="Farmer Image Right Bottom"
         className="absolute bottom-12 right-[300px] w-32 h-32 rounded-lg shadow-lg transform rotate-[20deg]"
-      /> */}
+      />
 
       <div className="container mx-auto px-4 text-center relative z-10">
         {/* Heading */}

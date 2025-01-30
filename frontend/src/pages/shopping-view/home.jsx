@@ -31,7 +31,7 @@ import HeroBanner from "@/components/homep/HeroBanner";
 import OrganicSection from "@/components/homep/OrganicSection";
 import WhyChooseUs from "@/components/homep/WhyChooseUs";
 import Testimonials from "@/components/homep/Testimonials";
-import ProductPage from "@/components/homep/ProductPage"; // Ensure this is imported from the correct location
+//import ProductPage from "@/components/homep/ProductPage"; // Ensure this is imported from the correct location
 import Services from "@/components/homep/Services";
 
 const categoriesWithIcon = [
@@ -121,8 +121,27 @@ function ShoppingHome() {
       {/* Organic Section */}
       <OrganicSection />
 
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-8">
+            Feature Products
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {productList && productList.length > 0
+              ? productList.map((productItem) => (
+                  <ShoppingProductTile
+                    handleGetProductDetails={handleGetProductDetails}
+                    product={productItem}
+                    handleAddtoCart={handleAddtoCart}
+                  />
+                ))
+              : null}
+          </div>
+        </div>
+      </section>
+
       {/* Product Page */}
-      <ProductPage />
+      {/* <ProductPage /> */}
 
 
       <Services />
@@ -138,7 +157,7 @@ function ShoppingHome() {
       </div>
 
       {/* Shopping Content */}
-      <div className="relative w-full h-[600px] overflow-hidden">
+      {/* <div className="relative w-full h-[600px] overflow-hidden">
         {featureImageList && featureImageList.length > 0
           ? featureImageList.map((slide, index) => (
               <img
@@ -175,9 +194,9 @@ function ShoppingHome() {
         >
           <ChevronRightIcon className="w-4 h-4" />
         </Button>
-      </div>
+      </div> */}
 
-      <section className="py-12 bg-gray-50">
+      {/* <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">
             Shop by category
@@ -198,9 +217,9 @@ function ShoppingHome() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
-      <section className="py-12">
+      {/* <section className="py-12">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">
             Feature Products
@@ -217,7 +236,7 @@ function ShoppingHome() {
               : null}
           </div>
         </div>
-      </section>
+      </section> */}
 
       <ProductDetailsDialog
         open={openDetailsDialog}

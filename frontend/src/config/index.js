@@ -65,19 +65,7 @@ export const addProductFormElements = [
       { id: "Organic", label: "Organic" },
     ],
   },
-  // {
-  //   label: "Brand",
-  //   name: "brand",
-  //   componentType: "select",
-  //   options: [
-  //     { id: "nike", label: "Nike" },
-  //     { id: "adidas", label: "Adidas" },
-  //     { id: "puma", label: "Puma" },
-  //     { id: "levi", label: "Levi's" },
-  //     { id: "zara", label: "Zara" },
-  //     { id: "h&m", label: "H&M" },
-  //   ],
-  // },
+  
   {
     label: "Price",
     name: "price",
@@ -153,14 +141,6 @@ export const categoryOptionsMap = {
   footwear: "Footwear",
 };
 
-// export const brandOptionsMap = {
-//   nike: "Nike",
-//   adidas: "Adidas",
-//   puma: "Puma",
-//   levi: "Levi",
-//   zara: "Zara",
-//   "h&m": "H&M",
-// };
 
 export const filterOptions = {
   category: [
@@ -170,14 +150,7 @@ export const filterOptions = {
     { id: "DryFruits", label: "Dry Fruits" },
     { id: "Organic", label: "Organic" },
   ],
-  // brand: [
-  //   { id: "nike", label: "Nike" },
-  //   { id: "adidas", label: "Adidas" },
-  //   { id: "puma", label: "Puma" },
-  //   { id: "levi", label: "Levi's" },
-  //   { id: "zara", label: "Zara" },
-  //   { id: "h&m", label: "H&M" },
-  // ],
+
 };
 
 export const sortOptions = [
