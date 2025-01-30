@@ -31,6 +31,7 @@ const registerUser = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Some error occured",
+      e
     });
   }
 };
@@ -83,6 +84,7 @@ const loginUser = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Some error occured",
+      e
     });
   }
 };
