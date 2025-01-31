@@ -31,6 +31,7 @@
 
 
 import { Outlet } from "react-router-dom";
+import img4 from "@/assets/images/img4.jpg";
 
 function AuthLayout() {
   return (
@@ -39,19 +40,19 @@ function AuthLayout() {
       <div
         className="hidden lg:flex items-center justify-center w-1/2 px-12 bg-cover bg-center"
         style={{
-          backgroundImage:
-            "url('https://img.freepik.com/free-vector/watercolor-farmers-market-illustration_23-2149346023.jpg')",
+          backgroundImage: `url(${img4})`,
+            // "url('https://i.pinimg.com/736x/7b/cf/3f/7bcf3f66f71a28b599ac3b237f7c8590.jpg')",
         }}
       >
         {/* Semi-transparent white background for readability */}
-        <div className="max-w-md space-y-6 text-center text-black /70 p-8 rounded-lg shadow-lg">
+        {/* <div className="max-w-md space-y-6 text-center text-black /70 p-8 rounded-lg shadow-lg">
           <h1 className="text-4xl font-extrabold tracking-tight">
             Welcome to Farm2Door
           </h1>
           <p className="text-lg font-medium">
             Bringing fresh, organic farm produce directly to your doorstep.
           </p>
-        </div>
+        </div> */}
       </div>
 
       {/* Right Section */}

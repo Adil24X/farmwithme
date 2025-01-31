@@ -19,7 +19,11 @@ const commonFeatureRouter = require("./routes/common/feature-routes");
 //create a separate file for this and then import/use that file here
 
 mongoose
+<<<<<<< HEAD
   .connect("mongodb+srv://a20033807:1D9L78%406@cluster0.uxhsr.mongodb.net/")
+=======
+  .connect("mongodb+srv://pranotipusdekar:Pranoti26@cluster0.ck9dq.mongodb.net/")
+>>>>>>> 548ecb7 (Updated frontend)
   .then(() => console.log("MongoDB connected"))
   .catch((error) => console.log(error));
 
@@ -27,6 +31,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(
+
   cors({
     origin: 'https://farm2doorforu.netlify.app', // Allow only your frontend
     methods: ["GET", "POST", "DELETE", "PUT"],

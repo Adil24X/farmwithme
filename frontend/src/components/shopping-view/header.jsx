@@ -330,7 +330,7 @@ function HeaderRightContent() {
         >
           <ShoppingCart className="w-6 h-6" />
           <span className="absolute top-[-5px] right-[2px] font-bold text-sm">
-            {cartItems?.items?.length || 0}  {/* Fallback to 0 if length is undefined */}
+            {cartItems?.items?.length || 0} 
           </span>
           <span className="sr-only">User cart</span>
         </Button>
@@ -367,7 +367,7 @@ function HeaderRightContent() {
 }
 
 function ShoppingHeader() {
-  const { isAuthenticated, user } = useSelector((state) => state.auth); // Get user and auth status from Redux
+  const { isAuthenticated, user } = useSelector((state) => state.auth); 
   const navigate = useNavigate();
 
   // Log values for debugging

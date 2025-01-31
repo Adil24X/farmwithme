@@ -61,8 +61,8 @@ export const addProductFormElements = [
       { id: "Vegetables", label: "Vegetables" },
       { id: "Fruits", label: "Fruits" },
       { id: "Spices", label: "Spices" },
-      { id: "Dry Fruits", label: "Dry Fruits" },
-      { id: "Organic", label: "Organic" },
+      { id: "DryFruits", label: "DryFruits" },
+      { id: "Dairy", label: "Dairy" },
     ],
   },
   
@@ -116,13 +116,13 @@ export const shoppingViewHeaderMenuItems = [
     path: "/shop/listing",
   },
   {
-    id: "Organic",
-    label: "Organic",
+    id: "Dairy",
+    label: "Dairy",
     path: "/shop/listing",
   },
   {
     id: "DryFruits",
-    label: "Dry Fruits",
+    label: "DryFruits",
     path: "/shop/listing",
   },
   {
@@ -134,11 +134,11 @@ export const shoppingViewHeaderMenuItems = [
 
 
 export const categoryOptionsMap = {
-  men: "Men",
-  women: "Women",
-  kids: "Kids",
-  accessories: "Accessories",
-  footwear: "Footwear",
+  Vegetables: "Vegetables",
+  Fruits: "Fruits",
+  Spices: "Spices",
+  DryFruits: "DryFruits",
+  Dairy: "Dairy"
 };
 
 
@@ -147,8 +147,8 @@ export const filterOptions = {
     { id: "Vegetables", label: "Vegetables" },
     { id: "Fruits", label: "Fruits" },
     { id: "Spices", label: "Spices" },
-    { id: "DryFruits", label: "Dry Fruits" },
-    { id: "Organic", label: "Organic" },
+    { id: "DryFruits", label: "DryFruits" },
+    { id: "Dairy", label: "Dairy" },
   ],
 
 };

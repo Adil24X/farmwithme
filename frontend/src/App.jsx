@@ -161,6 +161,8 @@ function App() {
         {/* Redirect the root to the shopping homepage */}
         <Route path="/" element={<Navigate to="/shop/home" />} />
 
+
+        
         <Route
           path="/auth"
           element={
