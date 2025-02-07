@@ -26,23 +26,24 @@ const createOrder = async (req, res) => {
         payment_method: "paypal",
       },
       redirect_urls: {
-        return_url: "http://localhost:5173/shop/paypal-return",
-        cancel_url: "http://localhost:5173/shop/paypal-cancel",
+        return_url: "http://localhost:5174/shop/paypal-return",
+        cancel_url: "http://localhost:5174/shop/paypal-cancel",
       },
       transactions: [
         {
+          // const exchangeRate =0.012;
           item_list: {
             items: cartItems.map((item) => ({
               name: item.title,
               sku: item.productId,
-              price: item.price.toFixed(2),
+              price: (item.price * 0.012).toFixed(2),
               currency: "USD",
               quantity: item.quantity,
             })),
           },
           amount: {
             currency: "USD",
-            total: totalAmount.toFixed(2),
+            total: (totalAmount * 0.012).toFixed(2),
           },
           description: "description",
         },

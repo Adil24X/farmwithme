@@ -31,7 +31,7 @@ function UserCartItemsContent({ cartItem }) {
           const getQuantity = getCartItems[indexOfCurrentCartItem].quantity;
           if (getQuantity + 1 > getTotalStock) {
             toast({
-              title: `Only ${getQuantity} quantity can be added for this item`,
+              title: `Only Rs {getQuantity} quantity can be added for this item`,
               variant: "destructive",
             });
 
@@ -104,13 +104,12 @@ function UserCartItemsContent({ cartItem }) {
         </div>
       </div>
       <div className="flex flex-col items-end">
-        <p className="font-semibold">
-          $
-          {(
-            (cartItem?.salePrice > 0 ? cartItem?.salePrice : cartItem?.price) *
-            cartItem?.quantity
-          ).toFixed(2)}
-        </p>
+      <p className="font-semibold">
+  Rs <span className="ml-1">
+    {((cartItem?.salePrice > 0 ? cartItem?.salePrice : cartItem?.price) * cartItem?.quantity).toFixed(2)}
+  </span>
+</p>
+
         <Trash
           onClick={() => handleCartItemDelete(cartItem)}
           className="cursor-pointer mt-1"
