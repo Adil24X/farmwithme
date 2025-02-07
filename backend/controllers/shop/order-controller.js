@@ -26,8 +26,8 @@ const createOrder = async (req, res) => {
         payment_method: "paypal",
       },
       redirect_urls: {
-        return_url: "https://nimble-kelpie-31a40e.netlify.app/shop/paypal-return",
-        cancel_url: "https://nimble-kelpie-31a40e.netlify.app/shop/paypal-cancel",
+        return_url: "https://kisankaart.netlify.app/shop/paypal-return",
+        cancel_url: "https://kisankaart.netlify.app/shop/paypal-cancel",
       },
       transactions: [
         {
