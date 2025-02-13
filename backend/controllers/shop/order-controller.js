@@ -58,7 +58,7 @@ const createOrder = async (req, res) => {
     //       success: false,
     //       message: "Error while creating paypal payment",
     //     });
-      else {
+  // }else {
         const newlyCreatedOrder = new Order({
           userId,
           cartId,
@@ -85,7 +85,7 @@ const createOrder = async (req, res) => {
           approvalURL,
           orderId: newlyCreatedOrder._id,
         });
-      }
+  // }
     });
   } catch (e) {
     console.log(e);
