@@ -27,7 +27,7 @@ const PORT = process.env.PORT || 5000;
 app.use(
 
   cors({
-    origin: 'kisankaart.netlify.app', // Allow only your frontend
+    origin: "https://kisankaart.netlify.app", // Allow only your frontend
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
