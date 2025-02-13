@@ -23,11 +23,11 @@ mongoose.connect("mongodb+srv://a20033807:1D9L78%406@cluster0.uxhsr.mongodb.net/
   .catch((error) => console.log(error));
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 app.use(
 
   cors({
-    origin: 'https://kisankaart.netlify.app', // Allow only your frontend
+    origin: 'http://localhost:5173', // Allow only your frontend
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",

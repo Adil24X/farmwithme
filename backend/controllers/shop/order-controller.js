@@ -1,7 +1,127 @@
-const {paypal,paypalsdk} = require("../../helpers/paypal");
+const { paypal, paypalsdk } = require("../../helpers/paypal");
 const Order = require("../../models/Order");
 const Cart = require("../../models/Cart");
 const Product = require("../../models/Product");
+
+// const createOrder = async (req, res) => {
+//   try {
+//     const {
+//       userId,
+//       cartItems,
+//       addressInfo,
+//       orderStatus,
+//       paymentMethod,
+//       paymentStatus,
+//       totalAmount,
+//       orderDate,
+//       orderUpdateDate,
+//       paymentId,
+//       payerId,
+//       cartId,
+//     } = req.body;
+
+//     const create_payment_json = {
+//       intent: "CAPTURE",
+//       payer: {
+//         payment_method: "paypal",
+//       },
+//       redirect_urls: {
+//         return_url: "http://localhost:5173/shop/paypal-return",
+//         cancel_url: "http://localhost:5173/shop/paypal-cancel",
+//       },
+//       transactions: [
+//         {
+//           // const exchangeRate =0.012;
+//           item_list: {
+//             items: cartItems.map((item) => ({
+//               name: item.title,
+//               sku: item.productId,
+//               price: (item.price * 0.012).toFixed(2),
+//               currency: "USD",
+//               quantity: item.quantity,
+//             })),
+//           },
+//           amount: {
+//             currency: "USD",
+//             total: (totalAmount * 0.012).toFixed(2),
+//           },
+//           description: "description",
+//         },
+//       ],
+//     };
+
+
+//     //chatgpt code
+//     const request = new paypalsdk.orders.OrdersCreateRequest();
+//     request.prefer("return=representation");
+//     request.requestBody(create_payment_json);
+
+//     try {
+//       const response = await paypal.execute(request);
+//       const paymentInfo = response.result; // Extracting payment details
+
+//       // Handle success
+//       console.log("Payment Created:", paymentInfo);
+//     } catch (error) {
+//       console.error("PayPal Order Creation Error:", error);
+//       // Handle error
+//     }
+
+
+//     // paypal.payment.create(create_payment_json, async (error, paymentInfo) => {
+//     //   if (error) {
+//     //     console.log(error);
+
+//     //     return res.status(500).json({
+//     //       success: false,
+//     //       message: "Error while creating paypal payment",
+//     //     });
+//     //   } else {
+//         const newlyCreatedOrder = new Order({
+//           userId,
+//           cartId,
+//           cartItems,
+//           addressInfo,
+//           orderStatus,
+//           paymentMethod,
+//           paymentStatus,
+//           totalAmount,
+//           orderDate,
+//           orderUpdateDate,
+//           paymentId,
+//           payerId,
+//         });
+
+//         await newlyCreatedOrder.save();
+
+//         const response = await paypal.execute(request);
+//         const paymentInfo = response.result; // Extracting payment details
+
+//         const approvalURL = paymentInfo.links.find(
+//           (link) => link.rel === "approval_url"
+//         ).href;
+
+//         res.status(201).json({
+//           success: true,
+//           approvalURL,
+//           orderId: newlyCreatedOrder._id,
+//         });
+//     //   }
+//     // });
+//   } catch (e) {
+//     console.log(e);
+//     res.status(500).json({
+//       success: false,
+//       message: "Some error occured!",
+//     });
+//   }
+// };
+
+
+
+
+
+
 
 const createOrder = async (req, res) => {
   try {
@@ -15,86 +135,103 @@ const createOrder = async (req, res) => {
       totalAmount,
       orderDate,
       orderUpdateDate,
-      paymentId,
-      payerId,
       cartId,
     } = req.body;
 
-    const create_payment_json = {
-      intent: "sale",
-      payer: {
-        payment_method: "paypal",
-      },
-      redirect_urls: {
-        return_url: "https://kisankaart.netlify.app/shop/paypal-return",
-        cancel_url: "https://kisankaart.netlify.app/shop/paypal-cancel",
-      },
-      transactions: [
+    // Convert INR to USD (Assumed conversion rate: 0.012)
+    const exchangeRate = 0.012;
+    
+    // Calculate item total dynamically
+    let calculatedItemTotal = 0;
+
+    const items = cartItems.map((item) => {
+      const itemPrice = (item.price * exchangeRate).toFixed(2);
+      const totalItemPrice = (itemPrice * item.quantity).toFixed(2);
+      calculatedItemTotal += parseFloat(totalItemPrice);
+
+      return {
+        name: item.title,
+        sku: item.productId,
+        unit_amount: {
+          currency_code: "USD",
+          value: itemPrice,
+        },
+        quantity: item.quantity,
+      };
+    });
+
+    // Ensure total amount is calculated correctly
+    calculatedItemTotal = calculatedItemTotal.toFixed(2);
+
+    const request = new paypalsdk.orders.OrdersCreateRequest();
+    request.prefer("return=representation");
+    request.requestBody({
+      intent: "CAPTURE",
+      purchase_units: [
         {
-          // const exchangeRate =0.012;
-          item_list: {
-            items: cartItems.map((item) => ({
-              name: item.title,
-              sku: item.productId,
-              price: (item.price * 0.012).toFixed(2),
-              currency: "USD",
-              quantity: item.quantity,
-            })),
-          },
           amount: {
-            currency: "USD",
-            total: (totalAmount * 0.012).toFixed(2),
+            currency_code: "USD",
+            value: calculatedItemTotal, // Total amount matches sum of items
+            breakdown: {
+              item_total: {
+                currency_code: "USD",
+                value: calculatedItemTotal,
+              },
+            },
           },
-          description: "description",
+          items,
         },
       ],
-    };
+      application_context: {
+        return_url: "http://localhost:5173/shop/paypal-return",
+        cancel_url: "http://localhost:5173/shop/paypal-cancel",
+      },
+    });
 
-    // paypal.payment.create(create_payment_json, async (error, paymentInfo) => {
-    //   if (error) {
-    //     console.log(error);
+    // Execute the PayPal order creation request
+    const response = await paypal.execute(request);
+    const paymentInfo = response.result;
 
-    //     return res.status(500).json({
-    //       success: false,
-    //       message: "Error while creating paypal payment",
-    //     });
-  // }else {
-        const newlyCreatedOrder = new Order({
-          userId,
-          cartId,
-          cartItems,
-          addressInfo,
-          orderStatus,
-          paymentMethod,
-          paymentStatus,
-          totalAmount,
-          orderDate,
-          orderUpdateDate,
-          paymentId,
-          payerId,
-        });
+    // Save order details in database
+    const newlyCreatedOrder = new Order({
+      userId,
+      cartId,
+      cartItems,
+      addressInfo,
+      orderStatus,
+      paymentMethod,
+      paymentStatus,
+      totalAmount,
+      orderDate,
+      orderUpdateDate,
+      paymentId: paymentInfo.id, // Store PayPal order ID
+    });
 
-        await newlyCreatedOrder.save();
+    await newlyCreatedOrder.save();
 
-        const approvalURL = paymentInfo.links.find(
-          (link) => link.rel === "approval_url"
-        ).href;
+    // Extract the approval URL for frontend redirection
+    const approvalURL = paymentInfo.links.find(
+      (link) => link.rel === "approve"
+    )?.href;
 
-        res.status(201).json({
-          success: true,
-          approvalURL,
-          orderId: newlyCreatedOrder._id,
-        });
-  // }
+    res.status(201).json({
+      success: true,
+      approvalURL,
+      orderId: newlyCreatedOrder._id,
     });
   } catch (e) {
-    console.log(e);
+    console.error("PayPal Order Creation Error:", e);
     res.status(500).json({
       success: false,
-      message: "Some error occured!",
+      message: "Some error occurred!",
     });
   }
 };
+
+
+
+
+
 
 const capturePayment = async (req, res) => {
   try {
