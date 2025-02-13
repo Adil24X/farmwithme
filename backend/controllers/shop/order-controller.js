@@ -26,8 +26,8 @@ const Product = require("../../models/Product");
 //         payment_method: "paypal",
 //       },
 //       redirect_urls: {
-//         return_url: "http://localhost:5173/shop/paypal-return",
-//         cancel_url: "http://localhost:5173/shop/paypal-cancel",
+//         return_url: "kisankaart.netlify.app/shop/paypal-return",
+//         cancel_url: "kisankaart.netlify.app/shop/paypal-cancel",
 //       },
 //       transactions: [
 //         {
@@ -183,8 +183,8 @@ const createOrder = async (req, res) => {
         },
       ],
       application_context: {
-        return_url: "http://localhost:5173/shop/paypal-return",
-        cancel_url: "http://localhost:5173/shop/paypal-cancel",
+        return_url: "kisankaart.netlify.app/shop/paypal-return",
+        cancel_url: "kisankaart.netlify.app/shop/paypal-cancel",
       },
     });
 
