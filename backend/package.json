@@ -9,8 +9,8 @@
     "dev": "nodemon server.js"
   },
   "license": "ISC",
-  "@paypal/checkout-server-sdk": "^1.0.3",
   "dependencies": {
+    "@paypal/checkout-server-sdk": "^1.0.3",
     "@paypal/paypal-server-sdk": "^0.6.1",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.4.0",
