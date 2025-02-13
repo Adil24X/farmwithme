@@ -183,8 +183,8 @@ const createOrder = async (req, res) => {
         },
       ],
       application_context: {
-        return_url: "kisankaart.netlify.app/shop/paypal-return",
-        cancel_url: "kisankaart.netlify.app/shop/paypal-cancel",
+        return_url: "https://kisankaart.netlify.app/shop/paypal-return",
+        cancel_url: "https://kisankaart.netlify.app/shop/paypal-cancel",
       },
     });
 
